@@ -1,3 +1,17 @@
+import sys
+import subprocess
+import importlib.util
+
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+def check_and_install(package):
+    if importlib.util.find_spec(package) is None:
+        install(package)
+# Check and install required packages
+required_packages = ['matplotlib', 'tkinter']
+for package in required_packages:
+    check_and_install(package)
+
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import tkinter as tk
